@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "-": "^0.0.1",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.18",
+    "@mui/material": "^5.15.18",
     "@types/react-dom": "^18.3.0",
     "D": "^1.0.0",
     "cra-template-typescript": "1.2.0",
