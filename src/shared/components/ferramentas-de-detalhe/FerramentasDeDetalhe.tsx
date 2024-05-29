@@ -127,7 +127,7 @@ export const FerramentasDeDetalhes: React.FC<IFerramentasDeDetalhesProps> = ({
                         <Typography variant="button" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
                             Novo
                         </Typography>
-                        TODO: fazer Group Button
+                        {/* TODO: colocar group button */}
                     </Button>
                 )}
             {
