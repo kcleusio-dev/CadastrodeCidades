@@ -1,8 +1,10 @@
 import { Environment } from "../../../environment";
 import { Api } from "../axios-config";
 
-interface IPessoa {
-    idPessoa: number;
+interface IDetalhePessoa {
+    id: number;
+    email: string;
+    cidadeId: number;
     nomeCompleto: string;
 
 }
@@ -35,15 +37,62 @@ const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCount | Er
         return new Error('Erro ao apresentar os registos.');
     } catch (error) {
         console.error(error);
-        return new Error((error as { message: string}).message || 'Erro ao apresentar os registos.');
+        return new Error((error as { message: string }).message || 'Erro ao apresentar os registos.');
 
     }
 };
 
-const getById = async (): Promise<any> => { };
-const create = async (): Promise<any> => { };
-const updateById = async (): Promise<any> => { };
-const deleteById = async (): Promise<any> => { };
+const getById = async (id: number): Promise<IDetalhePessoa | Error> => {
+
+    try {
+
+        const { data } = await Api.get(`/pessoas/${id}`);
+
+        if (data) {
+            return data
+        };
+        return new Error('Erro ao consultar o registo.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao consultar o registo.');
+
+    }
+};
+
+const create = async (dados: Omit<IDetalhePessoa, 'id'>): Promise<number | Error> => {
+
+    try {
+
+        const { data } = await Api.post<IDetalhePessoa>('/pessoas', dados);
+
+        if (data) {
+            return data.id
+        };
+        return new Error('Erro ao criar o registo.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registo.');
+
+    }
+};
+const updateById = async (id: number, dados: IDetalhePessoa): Promise<void | Error> => {
+    try {
+        await Api.put(`/pessoas/${id}`, dados);
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao actualizar o registo.');
+
+    }
+};
+const deleteById = async (id: number,): Promise<void | Error> => { 
+    try {
+        await Api.delete(`/pessoas/${id}`);
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao apagar o registo.');
+
+    }
+};
 
 export const PessoasService = {
     getAll,
