@@ -1,9 +1,10 @@
 {
-    "pessoas":[
+    "pessoas": [
         {
             "id": 1,
-            "nome":"Helder",
-            "sobrenome":"Daniel"
+            "email": "Helder.daniel7@outlook.pt",
+            "cidadeId": 7,
+            "nomeCompleto": "Hélder Daniel"
         }
     ]
 }
