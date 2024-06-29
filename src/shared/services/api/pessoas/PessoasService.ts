@@ -1,7 +1,14 @@
 import { Environment } from "../../../environment";
 import { Api } from "../axios-config";
 
-interface IDetalhePessoa {
+export interface IListagemPessoa {
+    id: number;
+    email: string;
+    cidadeId: number;
+    nomeCompleto: string;
+}
+
+export interface IDetalhePessoa {
     id: number;
     email: string;
     cidadeId: number;
@@ -9,11 +16,7 @@ interface IDetalhePessoa {
 
 }
 
-interface IListagemPessoa {
-    id: number;
-    nomeCompleto: string;
-    cidadeId: number;
-}
+
 type TPessoasComTotalCount = {
     data: IListagemPessoa[];
     totalCount: number;
@@ -30,8 +33,8 @@ const getAll = async (page = 1, filter = ''): Promise<TPessoasComTotalCount | Er
 
         if (data) {
             return {
-                data,
-                totalCount: Number(headers['x-total-count'] || Environment.LIMIT_DE_BUSCA),
+                data: data['data'],
+                totalCount: Number(data["items"] || Environment.LIMIT_DE_BUSCA),
             };
         };
         return new Error('Erro ao apresentar os registos.');
